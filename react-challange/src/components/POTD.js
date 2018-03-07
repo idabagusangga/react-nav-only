@@ -17,12 +17,6 @@ class Picture extends Component {
   getPicture = () => {
     axios.get(`https://api.nasa.gov/planetary/apod?api_key=F7OQVxHJR0EakMqdQxQuaM0MRQmIJjSXy7CL8Kug`)
       .then(response => {
-        // let copyOfData = {...this.state.data, pic:response.data.url}
-        // 
-        // copyOfData.pic = response.data.url
-        // console.log(copyOfData);
-        // this.setState({copyOfData})
-        // console.log(this.state.data, 'hehehehehhehehehheheheh');
         this.setState({ data: {...this.state.data, pic:response.data.url, info:response.data.explanation}});
       })
       .catch(err => {
@@ -34,7 +28,7 @@ class Picture extends Component {
   }
   render() {
     return (
-      <div><img src={this.state.data.pic}></img>
+      <div><img src={this.state.data.pic}></img> <br></br>
     <Link to={`${this.props.match.url}/${this.state.data.info}`}>Show Title</Link>
     <Route exact path={`${this.props.match.url}/:name`} component={Details}></Route>
   
