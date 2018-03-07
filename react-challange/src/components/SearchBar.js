@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import store from '../store/index'
+// import store from '../store/index'
+import { connect } from 'react-redux'
 
 
 class SearchBar extends Component {
@@ -10,6 +11,7 @@ class SearchBar extends Component {
       name: 'Angga'
     }
     this.handleChange = this.handleChange.bind(this)
+    this.submitHandler = this.submitHandler.bind(this)
   }
   handleChange (e) {
     const target = e.target
@@ -19,16 +21,17 @@ class SearchBar extends Component {
       [name] : value
     })
   }
-  addMeteor (e) {
+  submitHandler (e) {
     e.preventDefault()
-    console.log('ini adalaha eeeeeeeeeeeeeeeeeeeeeeeeeeeeee', e.target.msg.value);
-    store.dispatch({type:'ADD_METEOR', payload:{msg: e.target.msg.value, name: e.target.name.value} })
+    console.log('hehehehhe');
+    this.props.addMeteor({msg: this.state.msg, name: this.state.name})
+    alert('new meteor added')
     e.target.msg.value = ''
     e.target.name.value = ''
   }
   render() {
     return (
-      <form onSubmit={this.addMeteor}>
+      <form onSubmit={this.submitHandler}>
       <div className="form-group">
         <h3>Test on Change</h3>
         <p>Message</p>
@@ -44,4 +47,8 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+const mapDispatchToProps = (dispatch) => ({
+  addMeteor: (value) => dispatch({type: 'ADD_METEOR', payload:value})
+})
+
+export default connect(null,mapDispatchToProps)(SearchBar);
