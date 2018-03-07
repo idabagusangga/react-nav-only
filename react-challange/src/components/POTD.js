@@ -27,7 +27,7 @@ class Picture extends Component {
         console.log(err);
       })
   }
-  componentDidMount() {
+  componentWillMount() {
     this.getPicture()
   }
   render() {

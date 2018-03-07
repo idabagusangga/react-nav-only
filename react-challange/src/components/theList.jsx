@@ -33,7 +33,7 @@ class list extends Component {
       })
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.getNasaData()
   }
   render() {

@@ -6,12 +6,19 @@ function meteorReducer (state = [], action) {
     console.log('masuk sini', action);
         return state = action.payload
       break;
+    case 'ADD_METEOR':
+    console.log('masuk meteor add', action);
+      return state = [
+        ...state,
+        action.payload
+      ]
+    break;
     default:
         return state  
   }
 }
 
-function imageReducer (state = {data:{}}, action) {
+function imageReducer (state = [], action) {
   switch (action.type) {
     case 'GET_IMAGE':
       console.log('masuk image reducer', action);
@@ -21,6 +28,7 @@ function imageReducer (state = {data:{}}, action) {
       return state
   }
 }
+
 const nasa = combineReducers({
   meteorReducer,
   imageReducer
