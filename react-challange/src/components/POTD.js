@@ -2,22 +2,26 @@ import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom'
 import Details from './Details'
 import axios from 'axios'
+import store from '../store/index'
 
 
 class Picture extends Component {
   constructor() {
     super()
     this.state = {
-      data: {
-        pic: '',
-        info:'halo'
-      } 
+      data: store.getState().imageReducer
     }
+    store.subscribe( () => {
+      this.setState({
+        data: store.getState().imageReducer
+      })
+    })
   }
   getPicture = () => {
     axios.get(`https://api.nasa.gov/planetary/apod?api_key=F7OQVxHJR0EakMqdQxQuaM0MRQmIJjSXy7CL8Kug`)
       .then(response => {
-        this.setState({ data: {...this.state.data, pic:response.data.url, info:response.data.explanation}});
+        // this.setState({ data: {...this.state.data, pic:response.data.url, info:response.data.explanation}});
+        store.dispatch({type: 'GET_IMAGE', payload: {pic: response.data.url, info: response.data.explanation}})
       })
       .catch(err => {
         console.log(err);

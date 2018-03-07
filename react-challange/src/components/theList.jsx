@@ -9,12 +9,12 @@ class list extends Component {
   constructor() {
     super()
     this.state = {
-      data: store.getState()
+      data: store.getState().meteorReducer
     }
     store.subscribe( () => {
-      console.log(store.getState());
+      // console.log(store.getState());
       this.setState({
-        data: store.getState()
+        data: store.getState().meteorReducer
       })
       console.log('hello',this.state.data);
     })
