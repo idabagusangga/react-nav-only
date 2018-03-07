@@ -10,7 +10,6 @@ class SearchBar extends Component {
       name: 'Angga'
     }
     this.handleChange = this.handleChange.bind(this)
-    this.addMeteor = this.addMeteor.bind(this)
   }
   handleChange (e) {
     const target = e.target

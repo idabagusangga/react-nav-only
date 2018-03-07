@@ -19,23 +19,6 @@ class list extends Component {
       console.log('hello',this.state.data);
     })
   }
-
-  getNasaData = () => {
-    axios.get('https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=F7OQVxHJR0EakMqdQxQuaM0MRQmIJjSXy7CL8Kug')
-      .then(response => {
-        // this.setState({data: response.data.near_earth_objects['2015-09-08']}); 
-        // console.log(response.data.near_earth_objects['2015-09-08']);
-        store.dispatch({type: 'GET_METEORS', payload: response.data.near_earth_objects['2015-09-08']})
-        // console.log('ahahahahaha', store.getstate());
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
-
-  componentWillMount() {
-    this.getNasaData()
-  }
   render() {
     return (
     <div className="row">
