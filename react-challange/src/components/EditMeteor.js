@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
+const divStyle = {
+  'maxWidth' : '200px',
+  'maxHeight' : '200px'
+}
+
 class EditMeteor extends Component {
   constructor () {
     super()
@@ -19,16 +24,14 @@ class EditMeteor extends Component {
   }
   submitHandler = (e) => {
     e.preventDefault()
-    this.props.editMeteor({newName:this.state.meteorName, oldName:this.props.match.params.name} )
+    this.props.editMeteor({newName:this.state.meteorName, oldName:this.props.meteorName} )
     e.target.meteorName.value = ''
   }
   render() {
     return (
-      <div className='container'>
-        <h1>Edit Meteor Name</h1>
+      <div className='container' style={divStyle}>
         <form onSubmit={this.submitHandler}>
-          <p>Meteor Name</p>
-          <input type="text" name="meteorName" placeholder={this.props.match.params.name} onChange={this.handleChange}></input>
+          <input type="text" name="meteorName" placeholder={this.props.meteorName} onChange={this.handleChange}></input>
         </form>
       </div>
     );

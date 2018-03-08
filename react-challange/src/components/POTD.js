@@ -4,14 +4,27 @@ import Details from './Details'
 import { connect } from 'react-redux'
 
 
-
-
-const Picture = (props) => (
-  <div className="container"><img src={props.data.pic}></img> <br></br>
-    <Link to={`${props.match.url}/${props.data.info}`}>Show Title</Link>
-    <Route exact path={`${props.match.url}/:name`} component={Details}></Route>
-  </div>
-)
+class Picture extends Component {
+  render() {
+    if (this.props.data === 'Pending') {
+      return (
+        <div className="loader"></div>
+      );  
+    } else if ( this.props.data === 'Failed') {
+      return (
+        <h3>Not Found</h3>
+      )
+    } else {
+      return (
+        <div className="container"><img src={this.props.data.pic}></img> <br></br>
+          <Link to={`${this.props.match.url}/${this.props.data.info}`}>Show Title</Link>
+          <Route exact path={`${this.props.match.url}/:name`} component={Details}></Route>
+        </div>
+      )
+    }
+    
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
