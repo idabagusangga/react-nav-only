@@ -33,7 +33,6 @@ class App extends Component {
                     <Link to="/potd" style={linkStyles}>Picture of The Day</Link>   
                     <Route exact path="/" component={Home}></Route>   
                     <Route path="/potd" component={Potd}></Route>
-                      <Route exact path={`/edit/:name`} component={EditMeteor}></Route>
                   </div>
                 </BrowserRouter>
               
