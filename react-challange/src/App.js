@@ -10,6 +10,7 @@ import store from './store/index'
 import axios from 'axios'
 import EditMeteor from './components/EditMeteor'
 import { Provider } from 'react-redux' 
+import { GET_METEORS } from './store/actions'
 
 const linkStyles = {
   'marginLeft' : '8px'
@@ -21,7 +22,7 @@ class App extends Component {
       .then(response => {
         // this.setState({data: response.data.near_earth_objects['2015-09-08']}); 
         // console.log(response.data.near_earth_objects['2015-09-08']);
-        store.dispatch({type: 'GET_METEORS', payload: response.data.near_earth_objects['2015-09-08']})
+        store.dispatch(GET_METEORS(response.data.near_earth_objects['2015-09-08']))
         // console.log('ahahahahaha', store.getstate());
       })
       .catch(err => {

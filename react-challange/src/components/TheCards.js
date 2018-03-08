@@ -3,6 +3,8 @@ import { Route, Link } from 'react-router-dom'
 import meteor from '../meteor_circle2.png'
 import EditMeteor from './EditMeteor'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { DELETE_METEOR } from '../store/actions'
 
 const cardStyle = {
   'maxWidth': '20rem'
@@ -21,7 +23,7 @@ class Card extends Component {
   }
   remove = (e) => {
     e.preventDefault()
-    this.props.removeMeteor(this.props.docs.name)
+    this.props.DELETE_METEOR(this.props.docs.name)
   }
   
   render() {
@@ -36,14 +38,14 @@ class Card extends Component {
             <p>Magnitude: {this.props.docs.absolute_magnitude_h}</p>
           </div>
           <Link to={`edit/${this.props.docs.name}`}><button style={buttonStyle}>Edit</button></Link>
-          <button onClick={this.remove}>Remove</button>
+          <button onClick={this.remove} style={buttonStyle}>Remove</button>
       </div>
     </div>
     );
   }
 }
-const mapDispatchToProps = (dispatch) => ({
-  removeMeteor: (value) => dispatch({type: 'DELETE_METEOR', payload:value})
-})
+const mapDispatchToProps = (dispatch) => bindActionCreators ({
+  DELETE_METEOR
+},dispatch)
 
 export default connect(null, mapDispatchToProps)(Card);
